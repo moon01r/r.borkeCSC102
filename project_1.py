@@ -1,38 +1,38 @@
-print("Hello, welcome to your very own virtual multi-purpose calculator machine!")
-print("1. Simple Interest")
-print("2. Compound interest")
-print("3. Annuity Plan")
+import tkinter as tk
+from tkinter import messagebox
 
-collector = int(input("What would you like to calculate: "))
+def check_delivery_fee():
+    user_location = loc_input.get().strip().lower()
+    try:
+        package_weight = float(weight_input.get())
+    except ValueError:
+        messagebox.showerror("Input Error", "Enter a valid number for weight.")
+        return
 
-if collector == 1:
-    print("You have selected Simple Interest")
-    P = float(input("Enter the value of your principle: "))
-    R = float(input("Enter the value of the rate used: "))
-    T = float(input("Enter the value of the time: "))
-    A = P * (1 + (R/100.0) * T)
-    print(f"Simple interest Amount: N{A:.2f}")
+    fee = None
 
-elif collector == 2:
-    print("You have selected Compound Interest")
-    P = float(input("Enter the value of your principle: "))
-    R = float(input("Enter the value of the rate used: "))
-    n = float(input("Enter the value for n: "))
-    t = float(input("Enter the value for t: "))
-    A = P * ( 1 + R/n) ** (n*t)
-    print(f"Compound Interest is: N{A:.2f}")
+    if user_location == "ibeju-lekki":
+        fee = 5000 if package_weight >= 10 else 3500
+    elif user_location == "epe":
+        fee = 10000 if package_weight >= 10 else 5000
+    else:
+        messagebox.showerror("Unknown Area", "Only 'Ibeju-Lekki' and 'Epe' are supported.")
+        return
 
-elif collector == 3:
-    print("You have selected Annuity Plan")
-    P = float(input("Enter the value of your principle: "))
-    M = float(input("Enter the value for M: "))
-    T = float(input("Enter the value of the time: "))
-    R = float(input("Enter the value of the rate used: "))
-    n = float(input("Enter the value for n: "))
-    t = float(input("Enter the value for t: "))
-    A = (P * M * T) * ((1 + R/n) ** (n*t) - 1/ (R/n))
-    print(f"Annuity Plan is: N{A:.2f}")
+    messagebox.showinfo("Result", f"Delivery cost: ₦{fee}")
 
-else:
-    print("Invalid selection. Please select 1, 2 or 3")
+# Set up the interface
+app = tk.Tk()
+app.title("Delivery Calculator")
 
+tk.Label(app, text="Location (e.g. Ibeju-Lekki or Epe):").pack()
+loc_input = tk.Entry(app)
+loc_input.pack()
+
+tk.Label(app, text="Weight (kg):").pack()
+weight_input = tk.Entry(app)
+weight_input.pack()
+
+tk.Button(app, text="Check Price", command=check_delivery_fee).pack()
+
+app.mainloop()
