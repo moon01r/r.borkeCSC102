@@ -1,14 +1,14 @@
-#integer number
+# Integer number
 num = 100
 print(num)
-print("Data type of the variable num is", type(num))
+print("Data type of variable num is", type(num))
 
-#float number
-fnum =  34.45
+# float number
+fnum = 34.35
 print(fnum)
-print("Data type of this variable fnum is", type(fnum))
+print("Data type of variable fnum is", type(fnum))
 
-#complex number
+# complex number
 cnum = 3 + 4j
 print(cnum)
-print("Data Type of variable cnum is", type(cnum))
+print("Data type of variable cnum is", type(cnum))
